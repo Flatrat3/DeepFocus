@@ -370,6 +370,20 @@ function App() {
     setTasks((prev) => prev.filter((task) => task.id !== taskId))
   }
 
+  const handleResetAllData = () => {
+    window.localStorage.removeItem(STORAGE_KEY)
+    setIsRunning(false)
+    setFocusMinutes(25)
+    setBreakMinutes(5)
+    setMode('focus')
+    setSecondsLeft(25 * 60)
+    setCompletedSessions(0)
+    setTasks([])
+    setTaskInput('')
+    setAmbient('off')
+    setVolume(40)
+  }
+
   return (
     <div className="app-shell">
       <div className="backdrop backdrop-left" aria-hidden="true" />
@@ -401,6 +415,9 @@ function App() {
                 {preset.label} {preset.focus}/{preset.rest}
               </button>
             ))}
+            <button className="ghost-btn" onClick={handleResetAllData} type="button">
+              Məlumatları sıfırla
+            </button>
           </div>
 
           <div className="time-controls">
